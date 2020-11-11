@@ -5,7 +5,7 @@
 ### `npm install`
 ### `npm install -g nodemon`
 
-## Create an env inside server
+## Create an ".env" file inside server
 URL=http://localhost
 PORT=3000
 DB_URI=mongodb://127.0.0.1:27017/food-delivery-robot
