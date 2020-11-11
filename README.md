@@ -7,7 +7,7 @@
 
 ## Check the mongodb string
 
-### If mongo is install in your device, run terminal and type mongo db, connection string should be printed at first
+### If mongo is installed in your device, run the terminal and type mongo or mongodb, connection string should be printed at first
 
 ## Create an ".env" file inside server
 URL=http://localhost
