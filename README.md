@@ -2,12 +2,19 @@
 
 ## Run these Scripts from root
 
-## `npm install`
-## `npm install -g nodemon`
+#### `npm install`
+#### `npm install -g nodemon`
 
 ## Check the mongodb string
 
-### If mongo is installed in your device, run the terminal and type mongo or mongodb, connection string should be printed at first
+#### If mongo is installed in your device, run the terminal and type mongo or mongodb, connection string should be printed at first
+#### Inside mongo ternimal, create mongo database
+use food-delivery-robot;
+
+db.meta.insert({name:'react'});
+
+show dbs;
+
 
 ## Create an ".env" file inside server
 URL=http://localhost
