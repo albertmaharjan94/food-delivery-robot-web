@@ -16,7 +16,7 @@ PORT=3000
 
 DB_URI=mongodb://127.0.0.1:27017/food-delivery-robot
 
-**Note: DB_URL should be connection string of mongodb service**
+**Note: DB_URI should be connection string of mongodb service**
 
 **Note: Can be found inside .env.example**
 
