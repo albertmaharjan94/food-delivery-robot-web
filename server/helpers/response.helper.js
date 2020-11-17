@@ -1,23 +1,24 @@
+
 // custom response function
-sendSuccessResponse = (res, msg = null, data = null) => {
+sendSuccessResponse = async ({res, status = 200, message = null, data = null}) => {
     var response = {
-        status : 200,
+        status : status,
         success : true
     };
-
-    if(msg) response.message = msg;
-    if(data) respone.data = data;
-
+    
+    if(message) response.message = message;
+    if(data) response.data = data;
+    
     res.status(status).send(response);
 }
 
-sendErrorResponse = (res, status = 500, msg = null, data = null) => {
+sendErrorResponse = ({res, status = 500, message = null, data = null}) => {
     var response = {
         status : status,
         success : false
     };
 
-    if(msg) response.message = msg;
+    if(message) response.message = message;
     if(data) respone.data = data;
 
     res.status(status).send(response);

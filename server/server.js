@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const formData = require("express-form-data");
+const path = require('path');
 
 require('dotenv').config();
 
@@ -27,6 +28,7 @@ const options = {
     uploadDir: os.tmpdir(),
     autoClean: true
 };
+
 // parse data with connect-multiparty. 
 app.use(formData.parse(options));
 // delete from the request all empty files (size == 0)
@@ -36,12 +38,15 @@ app.use(formData.stream());
 // union the body and the files
 app.use(formData.union());
 
+
+// routers
+const router = require('./routes/index');
+console.log(`[Initial] : Configuring routes | SUCCESS`)
+
+app.use('/', router);
+app.use(express.static('./uploads/'));
+
 app.listen(port, () =>{
     console.log(`[Initial] : Server started as port : ${port} | SUCCESS`)
     console.log(`[Initial] : Hosting at ${domain}:${port} | SUCCESS`)
 })
-
-// routers
-const router = require('./routes/index');
-
-app.use('/', router);

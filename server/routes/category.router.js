@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { index, store, show, update, destroy } = require("../controllers/category.controller");
+const categoryController = require("../controllers/category.controller");
 
-router.get("/", index)
-router.get("/:id", show)
-router.post("/", store)
-router.put("/:id", update)
-router.delete("/:id", destroy)
+router.get("/", categoryController.index)
+router.get("/:id", categoryController.show)
+router.post("/", categoryController.store)
+router.put("/:id", categoryController.update)
+router.delete("/:id", categoryController.destroy)
 
 module.exports = router;
