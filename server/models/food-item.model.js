@@ -7,6 +7,7 @@ const foodItemSchema = new mongoose.Schema({
 	'title' : { type: String, required: true, minlength: 1, trim: true},
 	'short_description' : { type: String, required: true, minlength: 1, maxlength: 255, trim: true},
 	'long_description' : { type: String, required: true, minlength: 1, maxlength: 5000, trim: true},
+	'price' : { type: Number, required: true, min: 1},
 	'image': { 
 		type: String,
 		set: function(data) {

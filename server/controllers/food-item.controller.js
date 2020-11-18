@@ -15,6 +15,7 @@ exports.index = async (req, res) => {
                id: q.id,
                title: q.title,
                short_description: q.short_description,
+               price: q.price,
                long_description: q.long_description,
                image_url: q.image_path,
                category_id: q.category ? q.category.id : null,
@@ -41,6 +42,7 @@ exports.show = async (req, res) => {
          title: data.title,
          short_description: data.short_description,
          long_description: data.long_description,
+         price: data.price,
          image_url: data.image_path,
          category_id: data.category ? data.category.id : null,
          category: data.category ? data.category.title : null,
@@ -63,11 +65,18 @@ exports.store = async (req, res) => {
       short_description: request.short_description,
       long_description: request.long_description,
       category: request.category,
-   }
+      price: request.price,
+   }   
+   const newfoodItem = new FoodItem(foodItemData);
+
+   const validatedModel = newfoodItem.validateSync()
+   if(!!validatedModel) { sendErrorResponse({ res, status : 400 , msg : validatedModel.message} ); return; }
+   
    var file = null;
+   
    if(request.file !=undefined){
       const folder = "food_items";
-      var file = await uploadMany({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
+      var file = uploadMany({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
       
       if(file.success = true){
          file = file.data
@@ -76,13 +85,11 @@ exports.store = async (req, res) => {
          return
       }
    }
+   if(file != null)  newfoodItem.image = file;
 
-   if(file != null)  foodItemData.image = file;
-   const newfoodItem = new FoodItem(foodItemData);
-   newfoodItem
-      .save()
-      .then(data => { sendSuccessResponse({ res, msg : "Data saved"} ) })
-      .catch(err => { sendErrorResponse( {res, status : 400 , msg : err.message}) });
+   newfoodItem.save()
+   sendSuccessResponse({ res, msg : "Data saved"} )
+   
 }
 
 /**
@@ -97,6 +104,7 @@ exports.update = async (req, res) => {
       short_description: request.short_description,
       long_description: request.long_description,
       category: request.category,
+      price: request.price,
    }
 
    foodItem = await FoodItem.findByIdAndUpdate(req.params.id, foodItemData)
