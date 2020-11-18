@@ -76,8 +76,8 @@ exports.store = async (req, res) => {
    
    if(request.file !=undefined){
       const folder = "food_items";
-      var file = uploadMany({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
-      
+      var file = await uploadMany({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
+
       if(file.success = true){
          file = file.data
       }else{
@@ -85,6 +85,7 @@ exports.store = async (req, res) => {
          return
       }
    }
+
    if(file != null)  newfoodItem.image = file;
 
    newfoodItem.save()
