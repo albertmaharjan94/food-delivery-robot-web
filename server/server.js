@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const formData = require("express-form-data");
 const path = require('path');
+global.__basedir = __dirname;
 
 require('dotenv').config();
 

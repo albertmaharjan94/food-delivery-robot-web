@@ -4,5 +4,8 @@ const file = require('./file.helper');
 module.exports= {
     sendSuccessResponse : response.sendSuccessResponse,
     sendErrorResponse : response.sendErrorResponse,
-    uploadFiles : file.uploadFiles
+    uploadMany : file.uploadMany,
+    uploadOne : file.uploadOne,
+    deleteMany : file.deleteMany,
+    deleteOne : file.deleteOne
 }
