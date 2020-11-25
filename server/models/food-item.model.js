@@ -20,11 +20,11 @@ const foodItemSchema = new mongoose.Schema({
 });
 
 foodItemSchema.virtual('image_path').get(function() {
-	if(this.image != null && this.image != []){
-		image_urls = []
-		tmp = JSON.parse(this.image)
+	if(this.image != null && this.image !== []){
+		var image_urls = []
+		var tmp = JSON.parse(this.image)
 		if(Array.isArray(tmp)){
-			for(i of tmp){
+			for(var i of tmp){
 				image_urls.push(`${process.env.URL}:${process.env.PORT}/food_items/${i}`)
 			}
 		}else{

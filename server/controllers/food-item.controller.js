@@ -8,7 +8,7 @@ const { sendSuccessResponse, sendErrorResponse, uploadMany, uploadOne, deleteMan
  */
 exports.index = async (req, res) => {
    try{
-      foodItem = await FoodItem.find({}).populate('category')
+      await FoodItem.find({}).populate('category')
       .exec(function (err, data) {
          data = data.map(function(q) {
             return {
@@ -35,9 +35,9 @@ exports.index = async (req, res) => {
  * retrieve and display instance data from model
  */
 exports.show = async (req, res) => {
-   foodItem = await FoodItem.findById(req.params.id).populate('category')
+   await FoodItem.findById(req.params.id).populate('category')
    .then(data => { 
-      filtered = {
+      var filtered = {
          id: data.id,
          title: data.title,
          short_description: data.short_description,
@@ -74,11 +74,11 @@ exports.store = async (req, res) => {
    
    var file = null;
    
-   if(request.file !=undefined){
+   if(request.file !== undefined){
       const folder = "food_items";
-      var file = await uploadMany({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
+      file = await uploadMany({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
 
-      if(file.success = true){
+      if(file.success === true){
          file = file.data
       }else{
          sendErrorResponse({ res, status : 400 , msg : file.msg} )
@@ -108,7 +108,7 @@ exports.update = async (req, res) => {
       price: request.price,
    }
 
-   foodItem = await FoodItem.findByIdAndUpdate(req.params.id, foodItemData)
+   await FoodItem.findByIdAndUpdate(req.params.id, foodItemData)
    .then(
       data => { sendSuccessResponse({res, msg : "Data updated"} ) }
    )
@@ -120,10 +120,10 @@ exports.update = async (req, res) => {
  * delete instance data from model
  */
 exports.destroy = async (req, res) => {
-   foodItem = await FoodItem.findByIdAndDelete(req.params.id)
+   await FoodItem.findByIdAndDelete(req.params.id)
    .then(data =>{
-      files = JSON.parse(data.image)
-      console.log(files);
+      var files = JSON.parse(data.image)
+      
       deleteMany(files, 'food_items');
 
       sendSuccessResponse({res, msg : "Data deleted"}) 
@@ -133,15 +133,15 @@ exports.destroy = async (req, res) => {
 
 exports.addImage = async (req, res) =>{
    const request = req.body;
-   foodItem = await FoodItem.findOne({_id: req.params.id})
+   await FoodItem.findOne({_id: req.params.id})
    .then(async data => {
 
-      images = data.image ? JSON.parse(data.image) : []
+      var images = data.image ? JSON.parse(data.image) : []
 
       const folder = "food_items"
       var  file =  await uploadOne({file : request.file, folder : folder, validExt : ["jpg", "jpeg", "png", "jiff"]})
-      console.log(file);
-      if(file.success = true){
+      
+      if(file.success === true){
          file = file.data
          images.push(file);
          data.image = images;
@@ -157,10 +157,10 @@ exports.addImage = async (req, res) =>{
 
 exports.deleteImage = async (req, res) =>{
    const request = req.body;
-   foodItem = await FoodItem.findOne({_id: req.params.id})
+   await FoodItem.findOne({_id: req.params.id})
    .then(async data => {
       
-      images = data.image ? JSON.parse(data.image) : []
+      var images = data.image ? JSON.parse(data.image) : []
       
       const folder = "food_items"
       if(!images.includes(request.file)){
@@ -169,7 +169,7 @@ exports.deleteImage = async (req, res) =>{
       }
       var  file =  await deleteOne({filename : request.file, folder: folder})
       
-      if(file.success = true){
+      if(file.success === true){
          file = file.data
          images.pop(request.file);
          data.image = images;
