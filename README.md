@@ -1,6 +1,6 @@
 # FOOD DELIVERY ROBOT WEB APPLICATION
 
-## Run these Scripts from root
+### Run these Scripts from root
 
 #### `npm install`
 #### `npm install -g nodemon`
