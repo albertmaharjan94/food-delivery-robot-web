@@ -24,56 +24,15 @@ exports.index = async (req, res) => {
             path: 'table',
          })
          .exec(function (err, data) {
-            data.forEach(function (e, i) {
-               var grouped =
-               {
-                  "pending": {},
-                  "in_progress": {},
-                  "delivered": {},
-                  "canceled": {}
-               }
-               e.food_items.forEach(function (k) {
-                  var tmp = JSON.parse(JSON.stringify(k))
-                  var single_food = tmp._id
-                  let id = single_food._id;
-                  switch (tmp.status) {
-                     case 0: {
 
-                        if (grouped.pending[id] !== undefined) {
-                           grouped.pending[id].qty += 1
-                        } else {
-                           grouped.pending[id] = {
-                              food_name: single_food.title,
-                              qty: 1
-                           }
-                        }
-                        break;
-                     }
-                     case 2: {
-                        grouped.in_progress.push(single_food);
-                        break;
-                     }
-                     case 3: {
-                        grouped.delivered.push(single_food);
-                        break;
-                     }
-                     case 4: {
-                        grouped.canceled.push(single_food);
-                        break;
-                     }
-                     default: {
-                        break;
-                     }
-                  }
-               })
-               data[i].grouped = grouped;
-            })
+            data = data.map(function (q, i) {
 
-            data = data.map(function (q) {
+               q.grouped = q.groupFood();
 
                return {
                   id: q._id,
-                  table: q.table.table_name,
+                  table_id: q.table._id,
+                  table_name: q.table.table_name,
                   food_items: q.grouped
                };
             });
@@ -97,31 +56,38 @@ exports.index = async (req, res) => {
  * retrieve and display instance data from model
  */
 exports.show = async (req, res) => {
-   await Order.findById(req.params.id)
-      .populate("category")
-      .then((data) => {
-         var filtered = {
-            id: data.id,
-            title: data.title,
-            short_description: data.short_description,
-            long_description: data.long_description,
-            price: data.price,
-            image_url: data.image_path,
-            category_id: data.category ? data.category.id : null,
-            category: data.category ? data.category.title : null,
-         };
-         sendSuccessResponse({
-            res,
-            data: filtered
-         });
-      })
-      .catch((err) =>
-         sendErrorResponse({
-            res,
-            status: 400,
-            msg: err.message
+   try {
+      await Order.findById(req.params.id)
+         .populate({
+            path: 'food_items._id',
+            model: 'FoodItem'
          })
-      );
+         .populate({
+            path: 'table',
+         })
+         .exec(function (err, data) {
+
+            var grouped = data.groupFood();
+
+            data = {
+               id: data._id,
+               table_id: data.table._id,
+               table_name: data.table.table_name,
+               food_items: grouped
+            };
+
+            sendSuccessResponse({
+               res,
+               data: data,
+            });
+         });
+   } catch (err) {
+      sendErrorResponse({
+         res,
+         status: 400,
+         msg: err.message
+      });
+   }
 };
 
 /**
@@ -284,3 +250,284 @@ exports.destroy = async (req, res) => {
          })
       );
 };
+
+
+//  put
+exports.updatePendingToInProgress = async (req, res) => {
+   try {
+      await Order.findById(req.params.id)
+         .populate({
+            path: 'food_items._id',
+            model: 'FoodItem'
+         })
+         .populate({
+            path: 'table',
+         })
+         .exec(async function (err, data) {
+            var grouped = await data.groupFood();
+            var id = req.body.food_id;
+            var qty = req.body.qty ? req.body.qty : 1;
+            var food = grouped.pending[id];
+
+            if (!food || food === undefined) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "No food found in pending."
+               });
+               return;
+            }
+            if (food !== undefined && qty > food.qty) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "Food exceeds pending order"
+               });
+               return;
+            }
+            var stat = data.changeToProgress({ food, qty })
+            if (stat.success === false) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: stat.msg
+               });
+            }
+
+            sendSuccessResponse({
+               res,
+               msg: 'Successfully updated'
+            });
+         });
+   } catch (err) {
+      sendErrorResponse({
+         res,
+         status: 400,
+         msg: err.message
+      });
+   }
+}
+
+exports.updateProgressToPending = async (req, res) => {
+   try {
+      await Order.findById(req.params.id)
+         .populate({
+            path: 'food_items._id',
+            model: 'FoodItem'
+         })
+         .populate({
+            path: 'table',
+         })
+         .exec(async function (err, data) {
+            var grouped = await data.groupFood();
+            var id = req.body.food_id;
+            var qty = req.body.qty ? req.body.qty : 1;
+            var food = grouped.in_progress[id];
+
+            if (!food || food === undefined) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "No food found in in progress."
+               });
+               return;
+            }
+            if (food !== undefined && qty > food.qty) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "Food exceeds in progress order"
+               });
+               return;
+            }
+            var stat = data.changeToPending({ food, qty })
+            if (stat.success === false) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: stat.msg
+               });
+            }
+
+            sendSuccessResponse({
+               res,
+               msg: 'Successfully updated'
+            });
+         });
+   } catch (err) {
+      sendErrorResponse({
+         res,
+         status: 400,
+         msg: err.message
+      });
+   }
+}
+
+exports.updateInProgressToDelivered = async (req, res) => {
+   try {
+      await Order.findById(req.params.id)
+         .populate({
+            path: 'food_items._id',
+            model: 'FoodItem'
+         })
+         .populate({
+            path: 'table',
+         })
+         .exec(async function (err, data) {
+            var grouped = await data.groupFood();
+            var id = req.body.food_id;
+            var qty = req.body.qty ? req.body.qty : 1;
+
+            var food = grouped.in_progress[id];
+
+            if (!food || food === undefined) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "No food found in in progress."
+               });
+               return;
+            }
+            if (food !== undefined && qty > food.qty) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "Food exceeds in progress order"
+               });
+               return;
+            }
+            var stat = data.changeToDelivered({ food, qty })
+            if (stat.success === false) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: stat.msg
+               });
+            }
+
+            sendSuccessResponse({
+               res,
+               msg: 'Successfully updated'
+            });
+         });
+   } catch (err) {
+      sendErrorResponse({
+         res,
+         status: 400,
+         msg: err.message
+      });
+   }
+}
+
+
+exports.updateDeliveredToInProgress = async (req, res) => {
+   try {
+      await Order.findById(req.params.id)
+         .populate({
+            path: 'food_items._id',
+            model: 'FoodItem'
+         })
+         .populate({
+            path: 'table',
+         })
+         .exec(async function (err, data) {
+            var grouped = await data.groupFood();
+            var id = req.body.food_id;
+            var qty = req.body.qty ? req.body.qty : 1;
+
+            var food = grouped.delivered[id];
+
+            if (!food || food === undefined) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "No food found in in progress."
+               });
+               return;
+            }
+            if (food !== undefined && qty > food.qty) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "Food exceeds in progress order"
+               });
+               return;
+            }
+            var stat = data.changeToProgress({ food, qty })
+            if (stat.success === false) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: stat.msg
+               });
+            }
+
+            sendSuccessResponse({
+               res,
+               msg: 'Successfully updated'
+            });
+         });
+   } catch (err) {
+      sendErrorResponse({
+         res,
+         status: 400,
+         msg: err.message
+      });
+   }
+}
+
+exports.updatePendingToCanceled = async (req, res) => {
+   try {
+      await Order.findById(req.params.id)
+         .populate({
+            path: 'food_items._id',
+            model: 'FoodItem'
+         })
+         .populate({
+            path: 'table',
+         })
+         .exec(async function (err, data) {
+            var grouped = await data.groupFood();
+            var id = req.body.food_id;
+            var qty = req.body.qty ? req.body.qty : 1;
+
+            var food = grouped.pending[id];
+
+            if (!food || food === undefined) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "No food found in pending."
+               });
+               return;
+            }
+            if (food !== undefined && qty > food.qty) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: "Food exceeds in pending"
+               });
+               return;
+            }
+            var stat = data.changeToCanceled({ food, qty })
+            if (stat.success === false) {
+               sendErrorResponse({
+                  res,
+                  status: 400,
+                  msg: stat.msg
+               });
+            }
+
+            sendSuccessResponse({
+               res,
+               msg: 'Successfully updated'
+            });
+         });
+   } catch (err) {
+      sendErrorResponse({
+         res,
+         status: 400,
+         msg: err.message
+      });
+   }
+}
