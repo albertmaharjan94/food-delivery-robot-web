@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: Helvetica, sans-serif;
+}
+
+body {
+  background: #f1f6ff;
+}
+
+.navbar {
+  height: 50px;
+  margin-left: 8%;
+  background-color: rgb(82, 80, 80);
+}
+.wrapper {
+  position: relative;
+}
+
+.sidebar {
+  position: fixed;
+  width: 8%;
+  height: 100%;
+  background: #000000e0;
+  overflow: hidden;
+}
+.wrapper h6 {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(175, 9, 9);
+  height: 50px;
+  padding: 10px 0;
+  text-align: center;
+}
+.text-muted {
+  color: #adb5bd !important;
+}
+
+.sidebar ul {
+  padding-bottom: 20px;
+}
+
+/* ul li a img {
+  background: #66bb6a;
+  top: 0;
+  border: none;
+  width: 20px;
+} */
+
+.sidebar ul li {
+  padding: 18px;
+  text-align: center;
+  margin-left: 0;
+}
+.sidebar ul li:hover {
+  background-color: rgb(139, 4, 4);
+}
+
+.sidebar ul li a {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  display: block;
+}
+
+.sidebar ul li a .fas {
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  color: #ffffff !important;
+}
+
+/* i.fas.fa-home:hover,
+i.fas.fa-file-invoice:hover,
+i.fas.fa-video:hover,
+i.fas.fa-id-badge:hover,
+i.fas.fa-external-link-alt:hover,
+i.fas.fa-code:hover,
+i.far.fa-calendar-alt:hover,
+i.far.fa-credit-card:hover {
+  color: #304ffe !important;
+} */
+
+.sidebar ul li a .far {
+  width: 100%;
+  color: #ffffff !important;
+}
+
+.sidebar ul li:hover {
+  background: rgb(236, 8, 8);
+}
+
+.sidebar ul li a:hover {
+  text-decoration: none;
+}
+.active {
+  background-color: rgb(184, 22, 22);
+}

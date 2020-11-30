@@ -1,0 +1,505 @@
+{
+	"info": {
+		"_postman_id": "e134ce95-28ce-4bb0-a4a0-6ee0e1fc9e9f",
+		"name": "Food Delivery Robot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "View all categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{LOCAL}}/categories",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save categories",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Pork",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/categories",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/categories/5faba1fe535b73418889142f",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"categories",
+								"5faba1fe535b73418889142f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Chicken Edited",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/categories/5faba1fe535b73418889142f",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"categories",
+								"5faba1fe535b73418889142f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/categories/5fab9ff485babe57c06b6701",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"categories",
+								"5fab9ff485babe57c06b6701"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Table",
+			"item": [
+				{
+					"name": "View all tables",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{LOCAL}}/tables",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save tables",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "table_name",
+									"value": "table_101",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/tables",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one table by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/tables/5fb4d08cef8e2b6644ff91b1",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"tables",
+								"5fb4d08cef8e2b6644ff91b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update table",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "table_name",
+									"value": "table_101 Edited version 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/tables/5fb4d08cef8e2b6644ff91b1",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"tables",
+								"5fb4d08cef8e2b6644ff91b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete table",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/tables/5fb4d0d1ef8e2b6644ff91b2",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"tables",
+								"5fb4d0d1ef8e2b6644ff91b2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Food Items",
+			"item": [
+				{
+					"name": "List of food items",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{LOCAL}}/food-items",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one food item by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/food-items/5fb41532bf17b360e4ac19d2",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items",
+								"5fb41532bf17b360e4ac19d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save food-items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Momo Part 2",
+									"type": "text"
+								},
+								{
+									"key": "short_description",
+									"value": "M O M O version 1",
+									"type": "text"
+								},
+								{
+									"key": "long_description",
+									"value": "Momo is very good la",
+									"type": "text"
+								},
+								{
+									"key": "file[]",
+									"type": "file",
+									"src": "/C:/Users/alber/Downloads/alpurt.png"
+								},
+								{
+									"key": "file[]",
+									"type": "file",
+									"src": "/C:/Users/alber/Downloads/index.jfif"
+								},
+								{
+									"key": "category",
+									"value": "5faba1fe535b73418889142f",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "200.30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/food-items",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update food-items",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Momo edited",
+									"type": "text"
+								},
+								{
+									"key": "short_description",
+									"value": "M O M O version 2",
+									"type": "text"
+								},
+								{
+									"key": "long_description",
+									"value": "Momo is very good",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "5faba1fe535b73418889142f",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/food-items/5fb413486c5bd24de41f8570",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items",
+								"5fb413486c5bd24de41f8570"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/alber/Downloads/mall.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/food-items/add-image/5fb413486c5bd24de41f8570",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items",
+								"add-image",
+								"5fb413486c5bd24de41f8570"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete food-items",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL}}/food-items/5fb413486c5bd24de41f8570",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items",
+								"5fb413486c5bd24de41f8570"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "7b2acd2d-e819-43c1-ab16-1cf867295402.png",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL}}/food-items/delete-image/5fb413486c5bd24de41f8570",
+							"host": [
+								"{{LOCAL}}"
+							],
+							"path": [
+								"food-items",
+								"delete-image",
+								"5fb413486c5bd24de41f8570"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cef0edcd-c973-4d46-9cf0-aa9b3a72a012",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "94a69eda-dcb8-40a1-9ed7-b55a7bb49b0f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e64b932c-4c5f-4f9b-b681-24b79b6eb241",
+			"key": "LOCAL",
+			"value": "http://localhost:3000"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

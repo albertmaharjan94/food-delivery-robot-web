@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/datatable/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/items.css" />
+
+    <title>RoboRes</title>
+  </head>
+  <body>
+    <nav class="navbar fixed-top ">
+        <!-- Navbar content -->
+      </nav>
+    <div class="container-fluid p-0">
+      <div class="wrapper d-flex">
+        <div class="sidebar">
+          <h6>Manager <br>Panel</h6>
+          <ul>
+            <li class="">
+              <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+            </li>
+            <li>
+              <a href="orders.html"><i class="fas fa-concierge-bell"></i></i>Orders</a>     
+            </li>
+            <li class="active">
+              <a href=""><i class="fas fa-drumstick-bite"></i></i>Items</a>            </li>
+            <li>
+              <a href="tables.html"><i class="fas fa-utensils"></i>Tables</a>
+            </li>
+            <li>
+              <a href="robots.html"><i class="fas fa-robot"></i>Robots</a>
+            </li>
+                    
+          </ul>
+        </div>
+      </div>    
+    </div>
+    <div class="item-content">
+        <div class="card card-custom ml-3 mr-3">
+            <div class="card-header flex-wrap py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card-title d-flex align-items-center">
+    
+                            <h3 class="card-label my-0">
+                                Items
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-toolbar d-flex justify-content-end">
+                            <button id="addItem"  class="btn btn-primary font-weight-bolder  ">
+                                Add New Item
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Item Name</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Sub-Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Chi.MoMo</td>
+                                        <td>Non-veg</td>
+                                        <td>80</td>
+                                        <td>MoMo</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Chi.Pizza</td>
+                                        <td>Non-veg</td>
+                                        <td>180</td>
+                                        <td>Pizza</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Veg.MoMo</td>
+                                        <td>veg</td>
+                                        <td>70</td>
+                                        <td>MoMo</td>
+                                        <!-- <td><span class="badge badge-success">Available</span></td> -->
+                                        <td>
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    </tbody> 
+                                <thead>
+                                    <tr role="row">
+                                        <th>S.No</th>
+                                        <th>Item Name</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Sub-Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                </table>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="addItem" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-weight-bold" id="Title">Add Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                      <label for="inputName" class="col-md-4 col-form-label">Item Name</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control" id="inputName" placeholder="Item Name">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputCategory" class="col-md-4 col-form-label">Category</label>
+                        <div class="col-md-8">
+                          <input type="text" class="form-control" id="inputCategory" placeholder="Category">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputSubCat" class="col-md-4 col-form-label">Sub-Category</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="inputSubCat" placeholder="Sub-Category">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPrice" class="col-md-4 col-form-label">Price</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="inputPrice" placeholder="Price">
+                        </div>
+                    </div>
+                  </form>              
+              
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    
+    
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/datatable/jquery.dataTables.min.js"></script>
+    <script src="./assets/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="/js/items.js">
+        
+    </script>
+  </body>
+</html>
