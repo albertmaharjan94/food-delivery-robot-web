@@ -6,3 +6,8 @@ $(document).ready(function(){
     $("#modal").modal();
   });
 });
+$(document).ready(function(){
+  $(".deleteItem").click(function(){
+    $("#deleteModal").modal()
+  });
+});

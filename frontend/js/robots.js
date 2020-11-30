@@ -3,3 +3,9 @@ $(document).ready(function () {
       $("#modalRobo").modal();
     });
   });
+
+  $(document).ready(function(){
+    $(".deleteRobot").click(function(){
+      $("#deleteModal").modal()
+    });
+  });

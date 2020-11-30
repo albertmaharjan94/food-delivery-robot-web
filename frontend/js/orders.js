@@ -11,3 +11,8 @@ $(document).ready(function(){
     paging: false,
     info: false
 } );
+$(document).ready(function(){
+  $(".deleteOrder").click(function(){
+    $("#deleteModal").modal()
+  });
+});

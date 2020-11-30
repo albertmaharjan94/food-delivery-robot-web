@@ -17,3 +17,8 @@ $(document).ready(function(){
     $("#modalAddTable").modal();
   });
 });
+$(document).ready(function(){
+  $(".deleteTable").click(function(){
+    $("#deleteModal").modal()
+  });
+});
