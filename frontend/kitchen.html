@@ -24,7 +24,7 @@
               <div class="card-body p-2">
                 <div class="row">
                   <div class="col-md-3 mb-1">
-                    <btn class="btn btn-danger w-100" id="order">
+                    <btn class="btn btn-danger w-100 order">
                       <div class="row">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
@@ -33,7 +33,7 @@
                     </btn>
                   </div>
                   <div class="col-md-3">
-                    <btn class="btn btn-danger w-100">
+                    <btn class="btn btn-danger w-100 order">
                       <div class="row">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
@@ -42,7 +42,7 @@
                     </btn>
                   </div>
                   <div class="col-md-3">
-                    <btn class="btn btn-danger w-100">
+                    <btn class="btn btn-danger w-100 order">
                       <div class="row">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
@@ -51,7 +51,7 @@
                     </btn>
                   </div>
                   <div class="col-md-3">
-                    <btn class="btn btn-danger w-100">
+                    <btn class="btn btn-danger w-100 order">
                       <div class="row">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
@@ -60,7 +60,7 @@
                     </btn>
                   </div>
                   <div class="col-md-3">
-                    <btn class="btn btn-danger w-100">
+                    <btn class="btn btn-danger w-100 order">
                       <div class="row">
                         <div class="col-md-3">T1</div>
                         <div class="col-md-6">Veg. Burger</div>
@@ -129,8 +129,16 @@
         }
         console.log($(this).text);
       });
-      var color = $("#order").val();
-      console.log(color);
+      $(".order").on("click", function () {
+        if ($(this).hasClass("btn-danger")) {
+          $(this).removeClass("btn-danger");
+          $(this).addClass("btn-warning");
+        } else if ($(this).hasClass("btn-warning")) {
+          $(this).removeClass("btn-warning");
+          $(this).addClass("btn-success");
+        }
+        console.log($(this).text);
+      });
     </script>
   </body>
 </html>
