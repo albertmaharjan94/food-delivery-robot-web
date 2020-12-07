@@ -10,7 +10,7 @@ $(".robotCall").click(function () {
     }
     console.log($(this).text);
   });
-  $(".order").on("click", function () {
+$(".order").on("click", function () {
     if ($(this).hasClass("btn-danger")) {
       $(this).removeClass("btn-danger");
       $(this).addClass("btn-warning");

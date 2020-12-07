@@ -25,46 +25,46 @@
                 <div class="row">
                   <div class="col-md-3 mb-1">
                     <btn class="btn btn-danger w-100 order">
-                      <div class="row">
+                      <div class="row p-3">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
                         <div class="col-md-3 p-0">1x</div>
                       </div>
                     </btn>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-3 mb-1">
                     <btn class="btn btn-danger w-100 order">
-                      <div class="row">
+                      <div class="row p-3">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
                         <div class="col-md-3 p-0">1x</div>
                       </div>
                     </btn>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-3 mb-1">
                     <btn class="btn btn-danger w-100 order">
-                      <div class="row">
+                      <div class="row p-3">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
                         <div class="col-md-3 p-0">1x</div>
                       </div>
                     </btn>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-3 mb-1">
                     <btn class="btn btn-danger w-100 order">
-                      <div class="row">
+                      <div class="row p-3">
                         <div class="col-md-3 p-0">T1</div>
                         <div class="col-md-6 p-0">Burger</div>
                         <div class="col-md-3 p-0">1x</div>
                       </div>
                     </btn>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-3 mb-1">
                     <btn class="btn btn-danger w-100 order">
-                      <div class="row">
-                        <div class="col-md-3">T1</div>
-                        <div class="col-md-6">Veg. Burger</div>
-                        <div class="col-md-3">1x</div>
+                      <div class="row p-3">
+                        <div class="col-md-3 p-0">T1</div>
+                        <div class="col-md-6 p-0">Burger</div>
+                        <div class="col-md-3 p-0">1x</div>
                       </div>
                     </btn>
                   </div>
@@ -116,29 +116,6 @@
       integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
       crossorigin="anonymous"
     ></script>
-    <script>
-      $(".robotCall").click(function () {
-        if ($(this).text() == "Call") {
-          $(this).removeClass("btn-success");
-          $(this).addClass("btn-primary");
-          $(this).text("Send");
-        } else if ($(this).text() == "Send") {
-          $(this).removeClass("btn-primary");
-          $(this).addClass("btn-success");
-          $(this).text("Call");
-        }
-        console.log($(this).text);
-      });
-      $(".order").on("click", function () {
-        if ($(this).hasClass("btn-danger")) {
-          $(this).removeClass("btn-danger");
-          $(this).addClass("btn-warning");
-        } else if ($(this).hasClass("btn-warning")) {
-          $(this).removeClass("btn-warning");
-          $(this).addClass("btn-success");
-        }
-        console.log($(this).text);
-      });
-    </script>
+    <script src="js/kitchen.js"></script>
   </body>
 </html>
